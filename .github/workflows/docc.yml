@@ -1,33 +1,26 @@
-#1
-name: docc
+name: DoccGenerate
 
-#2
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-#3
 permissions:
   pages: write
   id-token: write
   contents: read
-  
-#1
+
 jobs:
-  build:
-    #2
-    runs-on: macos-12
-    #3
+
+ build:
+    name: DoccGenerate
+    runs-on: macos-13
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      #4
       - name: Run Build Docs
         run: ./build-docc.sh
-      #5
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
@@ -35,9 +28,8 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: .docs
-
- #1
-  deploy:
+          
+ deploy:
     #2
     runs-on: ubuntu-latest
     #3
